@@ -1,6 +1,6 @@
 import {gql} from 'apollo-server'
 
-const typeDef = gql `
+const typeDefs = gql `
     type Listing{
         id:ID!
         title:String!
@@ -38,7 +38,7 @@ const typeDef = gql `
 
     type Query{
         allListings:[Listing]!
-        singleListing(id:ID):Listing
+        singleListing(id:ID!):Listing
     }
 
     type Mutation{
@@ -48,4 +48,4 @@ const typeDef = gql `
     }
 
 `
-export default typeDef;
+export default typeDefs;

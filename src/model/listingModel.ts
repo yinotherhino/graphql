@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-interface listingType {
+export interface listingInstance {
     _id: string;
     title:string;
     image:string;
@@ -38,7 +38,7 @@ const listingSchema = new Schema({
 },{timestamps:true}
 )
 
-export const ListingModel = mongoose.model<listingType>('Listing', listingSchema)
+export const ListingModel = mongoose.model<listingInstance>('Listing', listingSchema)
 
 
 

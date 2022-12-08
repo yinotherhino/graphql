@@ -1,17 +1,24 @@
-import express from 'express'
-import logger from 'morgan'
+
 import mongoose from 'mongoose'
 import {config} from 'dotenv'
+import {ApolloServer} from 'apollo-server'
+import resolvers from './Graphql';
+import typeDefs from './Graphql/type-defs';
 
-const app = express();
 const port = 5010;
 config();
 
 mongoose.set('strictQuery', false);
-mongoose.connect(process.env.URI!);
+mongoose.connect(process.env.URI!, ()=>{
+    console.log("Database connected")
+});
 
-app.use(logger("dev"));
+const server = new ApolloServer({
+    typeDefs, resolvers
+});
 
-app.listen(port, ()=> {
+// server.use(logger("dev"));
+
+server.listen( port, ()=> {
     console.log(`Server started on port ${port}`);
-})
+} )
